@@ -5,9 +5,24 @@ const User = require("../model/User");
 // GET route to fetch all users
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find()
-      .select("time date")
-      .sort({ createdAt: -1 });
+    const users = await User.find().select("time date").sort({ createdAt: -1 });
+    res.status(200).json({
+      status: "success",
+      message: "Users retrieved successfully",
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Failed to retrieve users",
+      error: error.message,
+    });
+  }
+});
+
+router.get("/admin", async (req, res) => {
+  try {
+    const users = await User.find();
     res.status(200).json({
       status: "success",
       message: "Users retrieved successfully",
@@ -68,9 +83,15 @@ router.post("/add", async (req, res) => {
     date,
   } = req.body;
 
-  if (!firstName || !lastName || !email || !phone || !time 
-    || !date
-    || !partySize) {
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !phone ||
+    !time ||
+    !date ||
+    !partySize
+  ) {
     return res.status(400).json({
       status: "error",
       message: "All fields are required",
@@ -87,7 +108,6 @@ router.post("/add", async (req, res) => {
     specialRequests,
   });
 
-  console.log(user);
 
   try {
     const savedUser = await user.save();
@@ -108,7 +128,7 @@ router.post("/add", async (req, res) => {
 // DELETE route to remove a user
 router.delete("/:userId", async (req, res) => {
   const { userId } = req.params;
-
+  console.log(userId);
   if (!userId) {
     return res.status(400).json({
       status: "error",

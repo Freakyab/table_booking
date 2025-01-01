@@ -112,8 +112,6 @@ export const TimelineView = ({
                 );
               });
 
-              console.log(isAvailable, "isAvailable");
-
               return (
                 <button
                   key={index}
