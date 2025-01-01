@@ -18,7 +18,9 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://freakyab-table-booking-backend.vercel.app/booking/admin");
+        const res = await fetch(
+          "https://freakyab-table-booking-backend.vercel.app/booking/admin"
+        );
         const data = await res.json();
         if (res.status !== 200) {
           toast({
@@ -63,7 +65,7 @@ function Page() {
   };
 
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-4 w-full h-full">
       {isLogin ? (
         <>
           <div className="border-[#E76F51] bg-[rgb(231,111,81,0.7)] p-3 m-3 text-white rounded-md">
@@ -139,7 +141,7 @@ function Page() {
           </form>
         </>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 sm:p-8">
+        <div className="p-4 w-full h-full md:p-8">
           {bookings.length === 0 ? (
             <div className="col-span-3 text-center text-lg font-semibold">
               No bookings found
@@ -149,14 +151,15 @@ function Page() {
               Restaurant Table Booking
             </h1>
           )}
-
-          {bookings.map((booking, index) => (
-            <BookingCard
-              setRefresh={setRefresh}
-              key={index}
-              booking={booking}
-            />
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 row-auto gap-4 items-center">
+            {bookings.map((booking, index) => (
+              <BookingCard
+                setRefresh={setRefresh}
+                key={index}
+                booking={booking}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>

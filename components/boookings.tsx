@@ -63,7 +63,7 @@ const BookingCard = ({
   };
 
   return (
-    <Card className="w-96">
+    <Card className="lg:max-w-96 w-full">
       <CardHeader className="bg-primary/5 ">
         <div className="flex justify-between">
           <div>
