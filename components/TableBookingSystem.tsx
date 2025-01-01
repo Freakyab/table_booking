@@ -65,7 +65,7 @@ const TableBookingSystem = () => {
     const errors = validateForm(formData);
 
     if (Object.keys(errors).length === 0) {
-      const res = await fetch("http://localhost:8000/booking/add", {
+      const res = await fetch("https://freakyab-table-booking-backend.vercel.app/booking/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,6 @@ const TableBookingSystem = () => {
       });
 
       const data = await res.json();
-
       if (data.status == "success") {
         toast({
           title: "Booking Successful",

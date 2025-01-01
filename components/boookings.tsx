@@ -35,7 +35,7 @@ const BookingCard = ({
         return;
       }
 
-      const res = await fetch(`http://localhost:8000/booking/${booking._id}`, {
+      const res = await fetch(`https://freakyab-table-booking-backend.vercel.app/booking/${booking._id}`, {
         method: "DELETE",
       });
       if (res.status !== 200) {

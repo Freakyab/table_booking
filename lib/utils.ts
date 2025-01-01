@@ -3,24 +3,31 @@ import { twMerge } from "tailwind-merge"
 
 import { FormData, TimeSlot, FormErrors, SlotTime } from '@/types';
 import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 export const generateTimeSlots = (selectedDate: Date): TimeSlot[] => {
   const [allFilledSlots, setAllFilledSlots] = useState<SlotTime[]>([]);
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
-      const res = await fetch("http://localhost:8000/booking/getDate", {
+      const res = await fetch("https://freakyab-table-booking-backend.vercel.app/booking/getDate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ date: selectedDate }),
-
       });
+      if (!res.ok) {
+        toast
+        return;
+      }
+
       const data = await res.json();
+      console.log(data);
       setAllFilledSlots(data.data);
     };
     fetchTimeSlots();
@@ -42,7 +49,7 @@ export const generateTimeSlots = (selectedDate: Date): TimeSlot[] => {
     slots.push({ time, available: isAvailable });
 
   }
-  
+
   return slots;
 };
 export const validateForm = (formData: FormData): FormErrors => {

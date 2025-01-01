@@ -18,7 +18,7 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:8000/booking/admin");
+        const res = await fetch("https://freakyab-table-booking-backend.vercel.app/booking/admin");
         const data = await res.json();
         if (res.status !== 200) {
           toast({

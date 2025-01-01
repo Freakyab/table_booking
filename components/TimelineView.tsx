@@ -31,7 +31,7 @@ export const TimelineView = ({
 
   useEffect(() => {
     const fetchFilledSlots = async () => {
-      const res = await fetch("http://localhost:8000/booking");
+      const res = await fetch("https://freakyab-table-booking-backend.vercel.app/booking");
       const data = await res.json();
       if (res.status !== 200) {
         toast({
