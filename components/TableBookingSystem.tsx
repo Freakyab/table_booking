@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -120,7 +121,7 @@ const TableBookingSystem = () => {
         <Card className="w-full max-w-4xl mx-auto">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">
-              Restaurant Table Booking
+              Restaurant Table Booking  
             </CardTitle>
             <CardDescription className="text-center">
               Choose your preferred view to select your dining time
@@ -217,6 +218,14 @@ const TableBookingSystem = () => {
               )}
             </form>
           </CardContent>
+          <CardFooter>
+            <p className="text-center text-sm text-gray-500">
+              view all bookings{" "}
+              <a href="/admin" className="text-primary-500 underline">
+                here
+              </a>
+            </p>
+          </CardFooter>
         </Card>
       )}
     </>
